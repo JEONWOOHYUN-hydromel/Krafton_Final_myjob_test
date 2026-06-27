@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: polling-demo
+  namespace: sandbox
+  labels:
+    app: polling-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: polling-demo
+  template:
+    metadata:
+      labels:
+        app: polling-demo
+    spec:
+      containers:
+        - name: app
+          image: ghcr.io/krafton-final/polling-demo:1.0.0
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: polling-demo-config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: polling-demo-config
+  namespace: sandbox
+data:
+  LOG_LEVEL: info
+  FEATURE_FLAG: "off"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: polling-demo
+  namespace: sandbox
+spec:
+  type: ClusterIP
+  selector:
+    app: polling-demo
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
