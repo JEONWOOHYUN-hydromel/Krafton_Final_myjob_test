@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: polling-demo
-  namespace: sandbox
+  namespace: myjob
   labels:
     app: polling-demo
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: polling-demo
