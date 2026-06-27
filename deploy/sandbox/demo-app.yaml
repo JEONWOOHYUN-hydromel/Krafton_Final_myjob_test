@@ -6,7 +6,7 @@ metadata:
   labels:
     app: polling-demo
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: polling-demo
@@ -17,9 +17,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/krafton-final/polling-demo:1.0.0
+          image: ghcr.io/krafton-final/polling-demo:1.1.0
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
           envFrom:
             - configMapRef:
                 name: polling-demo-config
@@ -30,8 +30,9 @@ metadata:
   name: polling-demo-config
   namespace: sandbox
 data:
-  LOG_LEVEL: info
-  FEATURE_FLAG: "off"
+  LOG_LEVEL: debug
+  FEATURE_FLAG: "on"
+  RELEASE_CHANNEL: canary
 ---
 apiVersion: v1
 kind: Service
@@ -45,4 +46,4 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 8080
+      targetPort: 9090
