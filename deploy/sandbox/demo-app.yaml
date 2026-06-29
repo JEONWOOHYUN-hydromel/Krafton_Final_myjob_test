@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: polling-demo
-  namespace: production
+  namespace: sandbox
   labels:
     app: polling-demo
 spec:
