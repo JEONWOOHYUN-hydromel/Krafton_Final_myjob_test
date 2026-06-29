@@ -10,3 +10,5 @@ Useful checks:
 - Deployment image and replica diffs
 - ConfigMap data diffs
 - Service port diffs
+
+some xhages?
