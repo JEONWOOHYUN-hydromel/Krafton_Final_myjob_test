@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: ghcr.io/krafton-final/polling-demo:1.1.4
+
           ports:
             - containerPort: 9090
           envFrom:
